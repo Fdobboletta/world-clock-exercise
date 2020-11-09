@@ -18,18 +18,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
+app.use(router);
 
-app.get('/', (req, res) => {
-  console.log('Hello World Request')
-  res.send({hello: 'Hello World'});
-});
-
-
-mongoose.connect('mongodb://mongo:27017/main', {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
+mongoose.connect('mongodb://root:example@mongo:27017', {useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
   console.log('DB CONNECTED!')
   app.listen({port: PORT}, () => {
     console.log(`Server running on http://localhost:${PORT}`);
   });
 })
-
-

@@ -1,10 +1,8 @@
 import express from 'express';
-import dbTimezones from './dbTimezones'
-import externalTimezones from './externalTimezones';
+import timezones from './timezones'
 
 const router = express.Router();
 
-router.use('/dbtimezones', dbTimezones);
-router.use('/externaltimezones', externalTimezones);
+router.use('/timezones', timezones);
 
 export default router;
