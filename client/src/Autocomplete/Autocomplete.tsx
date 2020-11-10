@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useFetch from 'use-http';
+import ClockCardsSection, { ICard } from '../ClockCardsSection/ClockCardsSection';
 import './Autocomplete.css'
 
 
@@ -7,10 +8,16 @@ import './Autocomplete.css'
   const [timezones, setTimezones] = useState<string[]>([]);
   const [search, setSearch] = useState<string>('');
   const [display, setDisplay] = useState<boolean>(false);
-  const wrapperRef = useRef<any>(null);
-  const { get, put ,response , error } = useFetch('http://localhost:4000/timezones')
+  const [cards, setCards] = useState<ICard[]>([]);
+  const wrapperRef = useRef<HTMLHeadingElement>(null);
+  
+  //@ts-ignore
+  const { get, put , del, response, error } = useFetch('http://localhost:4000/timezones', { cachePolicy: "no-cache" })
 
-  useEffect(() => { initializeTimezones() }, []) // componentDidMount
+  useEffect(() => { 
+    initializeTimezones();
+    getSelectedTimezones() 
+  }, []) // componentDidMount
   
   useEffect(() => {
     window.addEventListener("mousedown", handleClickOutside);
@@ -19,15 +26,25 @@ import './Autocomplete.css'
     };
   });
 
-
+  async function getSelectedTimezones() {
+    const userCards = await get(`/db`)
+    if (response.ok) setCards([...userCards.data])
+  }
+  
   async function initializeTimezones() {
     const initialTimezones = await get('/externalAPI')
     if (response.ok) setTimezones(initialTimezones.data)
   }
   async function addTimezone(selectedTimezone: string) {
     await put(`/db/${selectedTimezone}`)
-    if(response.ok) return console.log("Timezone added successfully")
-    else return console.log("Cannot add a new timezone", error);
+    if(response.ok) await getSelectedTimezones()
+    else return window.alert("Cannot add a new timezone" + error);
+  }
+
+  async function deleteTimezone(selectedTimezone: string) {
+    await del(`/db/${selectedTimezone}`)
+    if(response.ok) return getSelectedTimezones()
+    else return window.alert("There was an error when trying to delete your timezone" + error);
   }
 
   const updateSearch = (timezones: string) => {
@@ -41,39 +58,43 @@ import './Autocomplete.css'
       setDisplay(false);
     }
   };
+
  return (
-   <div ref={wrapperRef} className="auto-container">
-     <div className="search-container">
-      <input
-        className="search"
-        onClick={() => setDisplay(!display)}
-        placeholder="Type to search"
-        value={search}
-        onChange={event => setSearch(event.target.value)}
-      />
-      <button onClick={() => addTimezone(search)}> Send </button>
-     </div>
-      {display && (
-        <div className="display-container">
-          <ul className="timezones-list"> 
-          {timezones
-            .filter((timezone: string) => timezone.toLowerCase().includes(search.toLowerCase()))
-            .map((timezone: string, i: number) => {
-              return (
-               
-                <li
-                  onClick={() => updateSearch(timezone)}
-                  className="option"
-                  key={i}
-                  tabIndex="0"
-                >
-                  {timezone}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
-   </div>
+  <div>
+    <div ref={wrapperRef} className="auto-container"> 
+      <div className="search-display-container">
+        <input
+          className="search"
+          onClick={() => setDisplay(!display)}
+          placeholder="Type to search"
+          value={search}
+          onChange={event => setSearch(event.target.value)}
+        />    
+        {display && (
+          <div className="display-container">
+            <ul className="timezones-list"> 
+            {timezones
+              .filter((timezone: string) => timezone.toLowerCase().includes(search.toLowerCase()))
+              .map((timezone: string) => {
+                return (
+                
+                  <li
+                    onClick={() => updateSearch(timezone)}
+                    className="option"
+                    key={timezone}
+                    tabIndex="0"
+                  >
+                    {timezone}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+      </div>
+      <button placeholder="add" className="add-card-button" onClick={() => addTimezone(search)}>Add</button>
+    </div>
+    <ClockCardsSection cards={cards} deleteTimezone={deleteTimezone}/>
+  </div>
  )};
 

@@ -1,12 +1,13 @@
 .search-container {
   display: flex;
+  width: 100%;
+  justify-content: center;
 } 
 
 .search {
+  align-self: center;
   padding: 10px;
-  height: 20px;
-  width: 477px;
-  margin-right: 10px;
+  width: 85%;
   font-size: 18px;
   text-transform: capitalize;
 }
@@ -24,16 +25,29 @@
   color: black;
   width: fit-content;
 }
-
 .display-container {
   border-radius: 0px 0px 10px 10px;
   background-color: whitesmoke;
   overflow: scroll;
-  width: 500px;
-  max-height: 250px;
+  align-self: center;
+  width: 85%;
+  max-height: 15vh;
 
+}
+.search-display-container{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  height: 20vh;
+  width: 100%;
 }
 
 .timezones-list {
   margin: 10px 0px;
+}
+.add-card-button{
+  height: 4vh;
+  width: 15%;
+  margin-top: 0.1em;
+  margin-right: 1em;
 }

@@ -10,10 +10,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <img src={world} alt="logo" />
+      <img src={world} alt="logo"/>
         <h1>World Clock</h1>
         <Autocomplete/>
-        <ClockCardsSection/>
       </header>
     </div>
   );
