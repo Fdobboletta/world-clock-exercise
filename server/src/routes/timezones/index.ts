@@ -5,6 +5,8 @@ const router = express.Router()
 const Timezonescontroller = new TimezonesController()
 
 
+// added more endpoints than required to save the timezones chosen by the user in the DB
+
 router
   .route('/externalAPI')
   .get(Timezonescontroller.FetchAllFromTimezoneAPI)
