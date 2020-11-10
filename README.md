@@ -10,10 +10,9 @@
   5) Run `docker-compose up --build` and you should be ready to go
 
 
-## I installed a new NPM dependency and it's not finding it when docker runs
+## When a new dependency is installed,
   1) `npm install axios` on client or server
-  2) `docker-compose down` on the project root (This will delete the containers and with that the data on the DB will be wiped)
-  3) `docker-compose up --build` on the project root
+  2) `docker-compose up --build` on the project root. (Docker will automatically run `npm install` and update the image)
   
 ## How do I view the DB?
   1) Download Robo 3T
