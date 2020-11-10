@@ -1,9 +1,7 @@
 import React from 'react';
 import './App.css';
 import world from './world.png';
-import Autocomplete from './Autocomplete/Autocomplete';
-import ClockCardsSection from './ClockCardsSection/ClockCardsSection';
-
+import WorldClock from './WorldClock/WorldClock';
 
 function App() {
 
@@ -12,7 +10,7 @@ function App() {
       <header className="App-header">
       <img src={world} alt="logo"/>
         <h1>World Clock</h1>
-        <Autocomplete/>
+        <WorldClock/>
       </header>
     </div>
   );

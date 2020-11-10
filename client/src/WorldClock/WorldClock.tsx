@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useFetch from 'use-http';
 import ClockCardsSection, { ICard } from '../ClockCardsSection/ClockCardsSection';
-import './Autocomplete.css'
+import './WorldClock.css'
 
 
- export default function Autocomplete() {
+ export default function WorldClock() {
   const [timezones, setTimezones] = useState<string[]>([]);
   const [search, setSearch] = useState<string>('');
   const [display, setDisplay] = useState<boolean>(false);
