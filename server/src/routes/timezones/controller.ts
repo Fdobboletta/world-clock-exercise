@@ -21,7 +21,7 @@ class TimezonesController {
       await NewTimezone.save()
       res.status(200).send({
         data: parseDBTimezones(NewTimezone),
-        status: 201
+        status: 200
       })
     } catch(error) {
         res.status(500).send(error.toString())
