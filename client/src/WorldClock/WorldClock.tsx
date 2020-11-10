@@ -60,7 +60,7 @@ import './WorldClock.css'
   };
 
  return (
-  <div>
+  <div className="world-clock-container">
     <div ref={wrapperRef} className="auto-container"> 
       <div className="search-display-container">
         <input
