@@ -1,0 +1,39 @@
+.search-container {
+  display: flex;
+} 
+
+.search {
+  padding: 10px;
+  height: 20px;
+  width: 477px;
+  margin-right: 10px;
+  font-size: 18px;
+  text-transform: capitalize;
+}
+
+.search:focus {
+  border: 2px solid #61dafb;
+  outline: none;
+}
+
+.option {
+  display: block;
+  font-size: 18px;
+  margin: 10px 0px;
+  text-transform: capitalize;
+  color: black;
+  width: fit-content;
+}
+
+.display-container {
+  border-radius: 0px 0px 10px 10px;
+  background-color: whitesmoke;
+  overflow: scroll;
+  width: 500px;
+  max-height: 250px;
+
+}
+
+.timezones-list {
+  margin: 10px 0px;
+}

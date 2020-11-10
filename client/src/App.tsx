@@ -1,32 +1,19 @@
-import React, { useEffect } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import world from './world.png';
+import Autocomplete from './Autocomplete/Autocomplete';
+import ClockCardsSection from './ClockCardsSection/ClockCardsSection';
 
 
 function App() {
 
-  useEffect(() => {
-    async function helloWorld() {
-      const data = await fetch('http://localhost:4000/')
-      return await data.json()
-    }
-    helloWorld()
-  }, [])
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <img src={world} className="App-logo" alt="logo" />
+        <h1>World Clock</h1>
+        <Autocomplete/>
+        <ClockCardsSection/>
       </header>
     </div>
   );

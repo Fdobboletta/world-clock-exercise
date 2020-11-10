@@ -14,12 +14,12 @@ router
   .get(Timezonescontroller.GetAllTimezones)
 
 router
-  .route('/db/:zone/:name')
+  .route('/db/:name(*)')
   .put(Timezonescontroller.NewTimezone)
   .delete(Timezonescontroller.DeleteTimezone)
 
 router
-  .route('/externalAPI/:zone/:name')
+  .route('/externalAPI/:name(*)')
   .get(Timezonescontroller.FetchOneFromTimezoneAPI)
   
 export default router;

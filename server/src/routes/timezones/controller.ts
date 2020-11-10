@@ -17,8 +17,7 @@ class TimezonesController {
   public async NewTimezone(req: Request,res: ExpressResponse) {
     try {
       const name = req.params.name
-      const zone = req.params.zone
-      const NewTimezone = new DBTimezones({name:`${zone}/${name}`})
+      const NewTimezone = new DBTimezones({name:`${name}`})
       await NewTimezone.save()
       res.status(200).send({
         data: parseDBTimezones(NewTimezone),
@@ -31,8 +30,7 @@ class TimezonesController {
   public async DeleteTimezone(req: Request,res: ExpressResponse) {
     try {
       const name = req.params.name
-      const zone = req.params.zone
-      const response = await DBTimezones.findOneAndDelete({name: `${zone}/${name}`})
+      const response = await DBTimezones.findOneAndDelete({name: `${name}`})
       res.status(200).send({
         data: response,
         message: 'Timezone Deleted'
@@ -51,7 +49,7 @@ class TimezonesController {
   }
   public async FetchOneFromTimezoneAPI (req: Request, res: ExpressResponse) {
     try{
-      const data = await got(`http://worldtimeapi.org/api/timezone/${req.params.zone}/${req.params.name}`)
+      const data = await got(`http://worldtimeapi.org/api/timezone/${req.params.name}`)
       res.status(200).send({data: JSON.parse(data.body)})
     } catch (error) {
       res.status(500).send({error})
