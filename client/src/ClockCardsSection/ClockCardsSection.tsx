@@ -13,9 +13,7 @@ export default function ClockCardsSection () {
     const userCards = await get(`/db`)
     if (response.ok) setCards(userCards.data)
   }
-
-  console.log("TARJETAS",cards)
-
+  
   return (
     <div className="cards-section">
           {cards

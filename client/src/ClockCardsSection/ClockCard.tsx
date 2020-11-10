@@ -22,7 +22,6 @@ export default function ClockCard (prop: any) {
     if(response.ok) return console.log("Timezone deleted succesfully")
     else return console.log("There was an error when trying to delete your timezone", error);
   }
-  console.log("DATOS DE LA TARJETA",cardData)
   const timezone = cardData.timezone;
   const date = dayjs(cardData.datetime).format("DD/MM/YYYY")
   const time = dayjs(cardData.datetime).format("h:mm:A")
